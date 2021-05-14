@@ -1,10 +1,12 @@
 <script>
-   // function getNumbers(num) {
-   //    if (num < 15) {
-   //       return num++;
-   //       getNumbers(num);
-   //    }
-   // }
+   function getNumbers(num) {
+      if (num == 15) {
+         document.write(num);
+         return;
+      }
+      document.write(num++ + "<br>");
+      getNumbers(num);
+   }
 
    var num = Math.floor(Math.random() * (15 - 0)) + 0;
    alert("Сгенерируем случайное число от 0 до 15, \nРезультат: " + num + "\nДалее выведем все числа от " + num + " до 15-ти.");
@@ -42,7 +44,8 @@
       case 15:
          document.write("15 <br>");
    }
-   // alert("А теперь попробуем сделать тоже самое с помощью рекурсивной функции.")
+   alert("А теперь попробуем сделать тоже самое с помощью рекурсивной функции.")
 
-   // document.write("<h3><br>Результат работы рекурсивоной функции:</h3> <br>" + getNumbers(num));
+   document.write("<h3><br>Результат работы рекурсивоной функции:</h3> <br>");
+   getNumbers(num);
 </script>
