@@ -1,0 +1,25 @@
+<script>
+   function check(num) {
+      d = num - 1;
+      while (d > 1) {
+         if ((num % d) == 0) return false;
+         d--;
+      }
+      return true;
+
+      // for (var i = 2; i < num; i++) {
+      //    if (num % i === 0) {
+      //       return false;
+      //    }
+      // }
+      // return true;
+   }
+
+   var num = 2;
+   while (num <= 100) {
+      if (check(num)) {
+         console.log(num);
+      }
+      num++;
+   }
+</script>
