@@ -1,0 +1,31 @@
+<script>
+   function countBasketPrice(total) {
+      for (var item of basket) {
+         total += item.price * item.quantity;
+      }
+      return total;
+   }
+
+   var basket = [
+      {
+         title: "Товар 1",
+         price: 100,
+         quantity: 1,
+      },
+      {
+         title: "Товар 2",
+         price: 200,
+         quantity: 1,
+      },
+      {
+         title: "Товар 3",
+         price: 300,
+         quantity: 3,
+      }
+   ];
+   var total = 0;
+   for (var item of basket) {
+      console.log(item.title + " стоит " + item.price);
+   }
+   console.log("Общая сумма товаров = " + countBasketPrice(total))
+</script>
