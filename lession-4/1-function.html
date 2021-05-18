@@ -1,0 +1,23 @@
+<script>
+   var numbers = {};
+   var answer = parseInt(prompt("Введите число от 0 до 999"));
+   if (answer > 999 || answer < 0) {
+      console.log("Некорректное число, нужно было ввести число от 0 до 999");
+      console.log(numbers); // выодим пустой объект
+   } else {
+      var tempString = answer + " "; // преобразуем число в строку
+      var arr = tempString.split(""); // преобразуем строку в массив
+   }
+
+   numbers = getObject(arr);
+   console.log('В числе ' + answer + ' еденицы: ' + numbers.one + ', десятки: ' + numbers.tens + ', сотни: ' + numbers.hundreds);
+
+   function getObject(mas) {
+      var finalObject = {}; // пустой обьект для записи результата
+      finalObject['hundreds'] = +mas[0];
+      finalObject['tens'] = +mas[1];
+      finalObject['one'] = +mas[2];
+      return finalObject;
+   }
+
+</script>
