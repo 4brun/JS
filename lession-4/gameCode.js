@@ -13,7 +13,7 @@ do {//Выводим первый вопрос
     } else {
         ok = isAnswer(works.a0, event);
         if (event == 1) {
-            answers.push(works.a1); // Добавляем в массив ответ полтзователя
+            answers.push(works.a1); // Добавляем в массив ответ пользователя
         } else {
             answers.push(works.a2);
         }
