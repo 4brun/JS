@@ -8,12 +8,15 @@ var answers = [];
 do {//Выводим первый вопрос
     ok = false;
     event = +prompt(works.a00 + works.a1 + works.a2 + '-1 - Выход из игры');
-    answers.push(works.a00);
     if (event == -1) {
         break;
-    }
-    else {
+    } else {
         ok = isAnswer(works.a0, event);
+        if (event == 1) {
+            answers.push(works.a1); // Добавляем в массив ответ полтзователя
+        } else {
+            answers.push(works.a2);
+        }
     }
 } while (!ok);
 switch (event) {
@@ -21,12 +24,16 @@ switch (event) {
         do {
             ok = false;
             event = +prompt(works.b00 + works.b1 + works.b2 + '-1 - Выход из игры');
-            answers.push(works.b00);
             if (event == -1) {
                 break;
             }
             else {
                 ok = isAnswer(works.b0, event);
+                if (event == 1) {
+                    answers.push(works.b1);
+                } else {
+                    answers.push(works.b2);
+                }
             }
         } while (!ok);
         switch (event) {
@@ -34,12 +41,16 @@ switch (event) {
                 do {
                     ok = false;
                     event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
-                    answers.push(works.d00);
                     if (event == -1) {
                         break;
                     }
                     else {
                         ok = isAnswer(works.d0, event);
+                        if (event == 1) {
+                            answers.push(works.d1);
+                        } else {
+                            answers.push(works.d2);
+                        }
                     }
                 } while (!ok);
 
@@ -48,12 +59,16 @@ switch (event) {
                 do {
                     ok = false;
                     event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
-                    answers.push(works.d00);
                     if (event == -1) {
                         break;
                     }
                     else {
                         ok = isAnswer(works.d0, event);
+                        if (event == 1) {
+                            answers.push(works.b1);
+                        } else {
+                            answers.push(works.b2);
+                        }
                     }
                 } while (!ok);
 
@@ -68,12 +83,16 @@ switch (event) {
         do {
             ok = false;
             event = +prompt(works.c00 + works.c1 + works.c2 + '-1 - Выход из игры');
-            answers.push(works.c00);
             if (event == -1) {
                 break;
             }
             else {
                 ok = isAnswer(works.c0, event);
+                if (event == 1) {
+                    answers.push(works.c1);
+                } else {
+                    answers.push(works.c2);
+                }
             }
         } while (!ok);
         switch (event) {
@@ -81,12 +100,16 @@ switch (event) {
                 do {
                     ok = false;
                     event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
-                    answers.push(works.d00);
                     if (event == -1) {
                         break;
                     }
                     else {
                         ok = isAnswer(works.d0, event);
+                        if (event == 1) {
+                            answers.push(works.d1);
+                        } else {
+                            answers.push(works.d2);
+                        }
                     }
                 } while (!ok);
 
@@ -95,12 +118,16 @@ switch (event) {
                 do {
                     ok = false;
                     event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
-                    answers.push(works.d00);
                     if (event == -1) {
                         break;
                     }
                     else {
                         ok = isAnswer(works.d0, event);
+                        if (event == 1) {
+                            answers.push(works.d1);
+                        } else {
+                            answers.push(works.d2);
+                        }
                     }
                 } while (!ok);
 
@@ -119,7 +146,18 @@ switch (event) {
 //alert('Спасибо за игру');
 var finalAnswer = +prompt('Спасибо за игру, \nВведите номер хода, чтобы узнать ответ: ');
 
-alert("Ваш ответ на вопрос №" + finalAnswer + "\n" + answers[finalAnswer - 1]);
+var numAnswer = 0;
+if (finalAnswer == 1) {
+    numAnswer = works.a00
+} else if (finalAnswer == 2) {
+    numAnswer = works.b00
+} else if (finalAnswer == 3) {
+    numAnswer = works.c00
+} else {
+    numAnswer = works.d00
+}
+
+alert("Ваш ответ на вопрос №" + finalAnswer + "\n" + numAnswer + "\n" + answers[finalAnswer - 1]);
 
 //------------------------------------------
 function isAnswer(q, event) {
