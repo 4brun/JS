@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>Chess</title>
+</head>
+
+<body>
+   <div></div>
+
+   <script>
+      var abc = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+      var desk = document.createElement('table');
+
+      for (var i = 1; i < 8; i++) {
+         var tr = document.createElement('tr');
+         desk.append(tr);
+         for (var j = 0; j <= abc.length; j++) {
+            var td = document.createElement('td');
+            tr.append(td);
+         }
+      }
+      document.getElementsByTagName('div')[0].append(desk);
+
+      var black = document.querySelectorAll('td');
+      console.log(black);
+      for (var i = 0; i <= black.length; i++) {
+         if (i % 2 == 0)
+            black[i].classList.add('black');
+      }
+   </script>
+</body>
+
+</html>
