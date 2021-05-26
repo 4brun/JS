@@ -13,25 +13,44 @@
    <div></div>
 
    <script>
-      var abc = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+      var abc = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];
+      var figs = ["", "&#9820;", "&#9822;", "&#9821;", "&#9819;", "&#9818;", "&#9821;", "&#9822;", "&#9820;", ""];
       var desk = document.createElement('table');
 
-      for (var i = 1; i < 8; i++) {
+      for (var i = 0; i < 10; i++) {
          var tr = document.createElement('tr');
-         desk.append(tr);
-         for (var j = 0; j <= abc.length; j++) {
+         desk.appendChild(tr);
+         for (var j = 0; j < 10; j++) {
             var td = document.createElement('td');
-            tr.append(td);
+            if ((i == 1) || (i == 8)) { // 1 и 9 строка - фигуры (массив)
+               td.innerHTML = '<span>' + figs[j] + '</span>';
+            }
+            if ((i == 2) || (i == 7)) { // 2 и 7 строка - пешки
+               td.innerHTML = "<span> &#9823; </span>";
+            }
+            if ((i == 0) || (i == 9)) { // алфавит в начале и конце
+               td.innerHTML = '<span>' + abc[j] + '</span>';
+            }
+            if (((j == 0) || (j == 9)) && ((i > 0) && (i < 9))) { // добавляем нумерацию в столбцы
+               td.innerHTML = "<span>" + i + "</span>";
+            }
+            if ((i == 0) || (j == 9)) { // переворачиваем первую строку и правый столбец
+               td.style.transform = "rotate(180deg)";
+            }
+            if ((i + j) % 2 == 0) { // красим ячейки
+               td.style.background = "#473E35";
+            } else {
+               td.style.background = "#F5DFAD";
+            }
+            if ((i > 5 && i < 9) && (j < 9 && j > 0)) { // красим нижние фигуры в белый
+               td.style.color = "#fffce5";
+            }
+            tr.appendChild(td);
          }
       }
+
       document.getElementsByTagName('div')[0].append(desk);
 
-      var black = document.querySelectorAll('td');
-      console.log(black);
-      for (var i = 0; i <= black.length; i++) {
-         if (i % 2 == 0)
-            black[i].classList.add('black');
-      }
    </script>
 </body>
 
