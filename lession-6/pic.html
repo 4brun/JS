@@ -24,6 +24,7 @@
       <img src="small/1.jpg" alt="1" class="small">
       <img src="small/2.jpg" alt="2" class="small">
       <img src="small/3.jpg" alt="3" class="small">
+      <img id='big' src="" alt="big">
    </div>
 
    <script>
@@ -31,7 +32,7 @@
 
       for (var i = 0; i < 3; i++) {
          smallPics[i].onclick = function (e) {
-            var bigPic = document.createElement('img');
+            bigPic = document.getElementById('big')
             bigPic.src = 'big/' + (e.target.alt[0]) + '.jpg';
             bigPic.onerror = function () {
                alert('Изображение не найдено');
