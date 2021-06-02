@@ -8,6 +8,8 @@ var gameIsRunning = false; // Запущена ли игра
 var snake_timer; // Таймер змейки
 var food_timer; // Таймер для еды
 var score = 0; // Результат
+var stop = []; // координаты барьера
+var cord = []; // координаты головы змейки
 
 function init() {
     prepareGameField(); // Генерация поля
@@ -68,6 +70,7 @@ function startGame() {
 
     snake_timer = setInterval(move, SNAKE_SPEED);//каждые 200мс запускаем функцию move
     setTimeout(createFood, 5000);
+    setTimeout(createBarrier, 5000);
 }
 
 /**
@@ -105,6 +108,8 @@ function move() {
     var snake_coords = snake_head_classes[1].split('-');//преобразовали строку в массив
     var coord_y = parseInt(snake_coords[1]);
     var coord_x = parseInt(snake_coords[2]);
+    cord.splice(0, 2, coord_x, coord_y);
+    //  console.log(cord);
 
     // Определяем новую точку
     if (direction == 'x-') {
@@ -123,12 +128,11 @@ function move() {
     // Проверки
     // 1) new_unit не часть змейки
     // 2) Змейка не ушла за границу поля
-    //console.log(new_unit);
-    if (!isSnakeUnit(new_unit) && new_unit !== undefined) {
+    // console.log(new_unit);
+    if (!isSnakeUnit(new_unit) && new_unit !== undefined && !isBarrier(stop, cord)) {
         // Добавление новой части змейки
         new_unit.setAttribute('class', new_unit.getAttribute('class') + ' snake-unit');
         snake.push(new_unit);
-
         // Проверяем, надо ли убрать хвост
         if (!haveFood(new_unit)) {
             // Находим хвост
@@ -157,6 +161,19 @@ function isSnakeUnit(unit) {
     }
     return check;
 }
+
+// проверка на барьер
+function isBarrier(stop, cord) {
+    var check = false;
+    var a = stop.join();
+    var b = cord.join();
+    console.log(b)
+    if (a == b) {
+        check = true;
+    }
+    return check;
+}
+
 /**
  * проверка на еду
  * @param unit
@@ -171,6 +188,7 @@ function haveFood(unit) {
     if (unit_classes.includes('food-unit')) {
         check = true;
         createFood();
+        createBarrier();
         score++;
         var a = document.getElementById('score'); //находим нужный span
         a.innerText = score; //добавляем наш счёт в span
@@ -201,6 +219,40 @@ function createFood() {
 
             food_cell.setAttribute('class', classes + 'food-unit');
             foodCreated = true;
+        }
+    }
+}
+
+// Создание барьера
+
+function createBarrier() {
+    var barrier = false;
+
+    while (!barrier) {
+        var barr_x = Math.floor(Math.random() * FIELD_SIZE_X);
+        var barr_y = Math.floor(Math.random() * FIELD_SIZE_Y);
+        stop.splice(0, 2, barr_x, barr_y);
+
+        var prev_barr = document.querySelectorAll('.barr-unit');
+        if (prev_barr != '')
+            prev_barr.forEach(function (e) {
+                e.classList.remove('barr-unit')
+            }
+            );
+
+
+        var barr_cell = document.getElementsByClassName('cell-' + barr_y + '-' + barr_x)[0];
+        var barr_cell_classes = barr_cell.getAttribute('class').split(' ');
+
+        if (!barr_cell_classes.includes('snake-unit')) {
+            var classes = '';
+            for (var i = 0; i < barr_cell_classes.length; i++) {
+                classes += barr_cell_classes[i] + ' ';
+            }
+
+            barr_cell.setAttribute('class', classes + 'barr-unit');
+            console.log(stop);
+            barrier = true;
         }
     }
 }
@@ -250,12 +302,6 @@ function finishTheGame() {
 function refreshGame() {
     location.reload();
 }
-// function getScore() {
-//     if (score != null) {
-//         var a = document.getElementById('score');
-//         a.innerText(score);
-//     }
-// }
-console.log(score);
+
 // Инициализация
 window.onload = init;

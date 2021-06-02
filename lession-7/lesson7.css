@@ -27,6 +27,10 @@ td.game-table-cell {
 .food-unit {
     background-color: red;
 }
+
+.barr-unit {
+    background-color: yellow;
+}
 .buttons {
     display: inline-block;
 }
